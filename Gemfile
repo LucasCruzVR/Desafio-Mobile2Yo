@@ -30,6 +30,9 @@ gem "jbuilder"
 gem "interactor", "~> 3.0"
 gem 'interactor-contracts'
 
+#pagination
+gem 'kaminari'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

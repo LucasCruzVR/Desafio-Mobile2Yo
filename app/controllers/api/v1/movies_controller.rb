@@ -16,6 +16,8 @@ module Api
                                           .by_year(params[:year])
                                           .by_contry(params[:contry])
                                           .by_published_at(params[:published_at])
+                                          .page(params[:page])
+                                          .per(params[:per_page])
       end
     end
   end
