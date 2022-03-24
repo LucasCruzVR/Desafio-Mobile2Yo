@@ -4,16 +4,18 @@ module Api
   module V1
     class MoviesController < ApplicationController
       def read_csv
-        # file = File.read("netflix_titles.csv")
-        # data = CSV.parse(file, headers: true)
-        # CSV.foreach(netflix_titles.csv, headers: true) do |row|
-        # Moulding.create!(row.to_hash)
-        #    byebug
-        # end
         file = CSV.open('netflix_titles.csv', headers: :first_row).map(&:to_h)
-        context = Movie::Create.call(csv_data: file)
+        Movie::Create.call(csv_data: file)
+        head :ok
+      end
 
-        head :ok if context.success?
+      def index
+        @movies = Challenge::Models::Movie.order(year: :desc)
+                                          .by_title(params[:title])
+                                          .by_genre(params[:genre])
+                                          .by_year(params[:year])
+                                          .by_contry(params[:contry])
+                                          .by_published_at(params[:published_at])
       end
     end
   end
