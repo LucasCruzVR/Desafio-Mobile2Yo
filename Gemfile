@@ -60,7 +60,7 @@ group :development, :test do
 
   # Use RSpec to test model and controllers
   gem 'rspec-rails', '~> 5.0.0'
-
+  gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'faker', '>= 2.13.0'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -83,4 +83,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'shoulda-matchers', '~> 5.0'
 end

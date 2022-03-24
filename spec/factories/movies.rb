@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :movies, class: 'Challenge::Models::Movie' do
     id { Faker::IDNumber.valid }
     title { Faker::Movie.title }
-    genre { 'Movie' }
+    genre { 0 }
     year { Faker::Date.in_date_period(year: 2015) }
     country { Faker::Address.country }
     published_at { Faker::Date.in_date_period(year: 2016) }

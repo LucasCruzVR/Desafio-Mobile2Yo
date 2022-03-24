@@ -9,27 +9,25 @@ module Challenge
         }
 
         scope :by_genre, lambda { |genre|
-          if genre
-            if 'movie'.include?(genre.downcase)
-              @genre_number = 0
-            elsif 'tv show'.include?(genre.downcase)
-              @genre_number = 1
-            end
-          end
-          where('movies.genre = ? OR movies.genre = ?',
-                genre, @genre_number) if genre.present?
+          where('movies.genre = ?', genre) if genre.present?
         }
 
         scope :by_year, lambda { |year|
           where('movies.year = ?', year) if year.present?
         }
 
-        scope :by_contry, lambda { |country|
+        scope :by_country, lambda { |country|
           where('movies.country ilike ?', "%#{country}%") if country.present?
         }
 
-        scope :by_published_at, lambda { |published_at|
-          where('movies.published_at ilike ?', published_at) if published_at.present?
+        scope :by_published_at, lambda { |start_period, end_period|
+          if start_period.present? && end_period.present?
+            where('movies.published_at >= ? AND movies.published_at <= ?', start_period, end_period)
+          elsif start_period.present?
+            where('movies.published_at >= ?', start_period)
+          elsif end_period.present?
+            where('movies.published_at <= ?', end_period)
+          end
         }
       end
     end

@@ -14,8 +14,8 @@ module Api
                                           .by_title(params[:title])
                                           .by_genre(params[:genre])
                                           .by_year(params[:year])
-                                          .by_contry(params[:contry])
-                                          .by_published_at(params[:published_at])
+                                          .by_country(params[:contry])
+                                          .by_published_at(params[:start_period], params[:end_period])
                                           .page(params[:page])
                                           .per(params[:per_page])
       end
