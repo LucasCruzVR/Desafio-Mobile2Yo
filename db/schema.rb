@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_212946) do
   create_table "movies", id: false, comment: "List of titles from Netflix", force: :cascade do |t|
     t.string "id", null: false, comment: "Identifier number from Netflix"
     t.string "title", null: false, comment: "Movie title"
-    t.string "genre", null: false, comment: "Movie genre"
+    t.integer "genre", null: false, comment: "Movie genre"
     t.string "year", null: false, comment: "Released at this year"
     t.string "country", comment: "Movie contry"
     t.date "published_at", null: false, comment: "Become part of Netflix Catalog"

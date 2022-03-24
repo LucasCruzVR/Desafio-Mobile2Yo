@@ -20,7 +20,7 @@ module Movie
         context.movie = Challenge::Models::Movie.new
         context.movie.id = new_data['show_id']
         context.movie.title = new_data['title']
-        context.movie.genre = new_data['type']
+        context.movie.genre = new_data['type'] == 'Movie' ? 0 : 1
         context.movie.year = new_data['release_year']
         context.movie.country = new_data['country']
         context.movie.published_at = new_data['date_added']

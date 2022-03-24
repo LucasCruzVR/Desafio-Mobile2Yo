@@ -3,7 +3,7 @@ class CreateMovies < ActiveRecord::Migration[7.0]
     create_table :movies, id: false, comment: "List of titles from Netflix" do |t|
       t.string :id, null: false, comment: "Identifier number from Netflix"
       t.string :title, null: false, comment: "Movie title"
-      t.string :genre, null: false, comment: "Movie genre"
+      t.integer :genre, null: false, comment: "Movie genre"
       t.string :year, null: false, comment: "Released at this year"
       t.string :country, comment: "Movie contry"
       t.date :published_at, null: false, comment: "Become part of Netflix Catalog"

@@ -1,6 +1,12 @@
 ---
 en:
   activerecord:
+    attributes:
+      challenge/models/movie:
+        enums:
+          genre:
+            movie: "Movie"
+            tv_show: "TV Show"
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
