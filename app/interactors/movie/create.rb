@@ -25,13 +25,14 @@ module Movie
         context.movie.countries = Movie::Country.split_data(new_data['country'])
         context.movie.published_at = new_data['date_added']
         context.movie.description = new_data['description']
-        context.movie.director = new_data['director']
-        context.movie.cast = new_data['cast']
+        context.movie.persons_directors = Movie::Person.save_persons(new_data['director'])
+        context.movie.persons_actors = Movie::Person.save_persons(new_data['cast'])
         context.movie.rating = new_data['rating']
         context.movie.duration = new_data['duration']
         context.movie.categories = Movie::Category.save_categories(new_data['listed_in'])
 
         context.movie.save
+        byebug
       end
     end
   end

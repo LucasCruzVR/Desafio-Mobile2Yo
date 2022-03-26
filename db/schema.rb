@@ -10,18 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_26_155011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actors", comment: "Persons who are actors in a movia", force: :cascade do |t|
+    t.string "movie_id", comment: "Id from Movie table"
+    t.integer "person_id", comment: "Id from Person table"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", comment: "Categories list", force: :cascade do |t|
     t.string "name", null: false, comment: "Category name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "countries", comment: "Countries list", force: :cascade do |t|
     t.string "name", null: false, comment: "Country name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_countries_on_name", unique: true
+  end
+
+  create_table "directors", comment: "Persons who are director in a movie", force: :cascade do |t|
+    t.string "movie_id", comment: "Id from Movie table"
+    t.integer "person_id", comment: "Id from Person table"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,7 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
     t.string "cast", comment: "Movie cast"
     t.string "rating", comment: "Movie rating"
     t.string "duration", comment: "Movie Duration"
-    t.string "listed_in", comment: "Category search, used to find a movie"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_movies_on_id", unique: true
@@ -57,6 +72,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "persons", comment: "Persons list", force: :cascade do |t|
+    t.string "name", null: false, comment: "Person name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_persons_on_name", unique: true
+  end
+
+  add_foreign_key "actors", "movies", name: "movie_fk"
+  add_foreign_key "actors", "persons", name: "person_fk"
+  add_foreign_key "directors", "movies", name: "movie_fk"
+  add_foreign_key "directors", "persons", name: "person_fk"
   add_foreign_key "movies_categories", "categories", name: "category_fk"
   add_foreign_key "movies_categories", "movies", name: "movie_fk"
   add_foreign_key "movies_countries", "countries", name: "country_fk"

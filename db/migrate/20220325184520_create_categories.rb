@@ -4,5 +4,7 @@ class CreateCategories < ActiveRecord::Migration[7.0]
       t.string :name, null: false, comment: 'Category name'
       t.timestamps
     end
+
+    add_index :categories, :name, unique: true
   end
 end

@@ -4,8 +4,7 @@ module Movie
       categories = categories.split(', ')
 
       categories.each do |category|
-        search = Challenge::Models::Category.by_name(category)
-        new_category = Challenge::Models::Category.new(name: category) unless search.present?
+        new_category = Challenge::Models::Category.new(name: category)
         new_category.save if new_category.present?
       end
 

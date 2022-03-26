@@ -1,6 +1,6 @@
 module Challenge
   module Concerns
-    module Country
+    module Person
       module Validations
         extend ActiveSupport::Concern
         included do
