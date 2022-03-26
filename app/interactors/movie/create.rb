@@ -22,14 +22,14 @@ module Movie
         context.movie.title = new_data['title']
         context.movie.genre = new_data['type'] == 'Movie' ? 0 : 1
         context.movie.year = new_data['release_year']
-        context.movie.country = new_data['country']
+        context.movie.countries = Movie::Country.split_data(new_data['country'])
         context.movie.published_at = new_data['date_added']
         context.movie.description = new_data['description']
         context.movie.director = new_data['director']
         context.movie.cast = new_data['cast']
         context.movie.rating = new_data['rating']
         context.movie.duration = new_data['duration']
-        context.movie.listed_in = new_data['listed_in']
+        context.movie.categories = Movie::Category.save_categories(new_data['listed_in'])
 
         context.movie.save
       end

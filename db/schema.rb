@@ -14,13 +14,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
+  create_table "categories", comment: "Categories list", force: :cascade do |t|
+    t.string "name", null: false, comment: "Category name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "countries", comment: "Table Country", force: :cascade do |t|
+  create_table "countries", comment: "Countries list", force: :cascade do |t|
     t.string "name", null: false, comment: "Country name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
     t.string "title", null: false, comment: "Movie title"
     t.integer "genre", null: false, comment: "Movie genre"
     t.string "year", null: false, comment: "Released at this year"
-    t.string "country", comment: "Movie contry"
     t.date "published_at", null: false, comment: "Become part of Netflix Catalog"
     t.text "description", null: false, comment: "Movie description"
     t.string "director", comment: "Movie director"
@@ -44,9 +43,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_185739) do
     t.index ["id"], name: "index_movies_on_id", unique: true
   end
 
-  create_table "movies_categories", force: :cascade do |t|
-    t.string "movie_id"
-    t.integer "category_id"
+  create_table "movies_categories", comment: "Table between Movies and Categories", force: :cascade do |t|
+    t.string "movie_id", comment: "Id from Movie table"
+    t.integer "category_id", comment: "Id from Category table"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
