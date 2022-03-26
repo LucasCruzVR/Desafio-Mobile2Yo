@@ -6,8 +6,9 @@ module Challenge
 
       enum genre: { movie: 0, tv_show: 1 }
 
-      include Challenge::Concerns::Scopes
-      include Challenge::Concerns::Validations
+      include Challenge::Concerns::Movie::Associations
+      include Challenge::Concerns::Movie::Scopes
+      include Challenge::Concerns::Movie::Validations
     end
   end
 end
