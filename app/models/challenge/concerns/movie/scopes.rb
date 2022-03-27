@@ -6,7 +6,7 @@ module Challenge
 
         included do
           scope :by_title, lambda { |title|
-            where('movies.title ilike ?', "%#{title}%") if title.present?
+            where('movies.title ilike ?', title) if title.present?
           }
 
           scope :by_genre, lambda { |genre|
@@ -18,7 +18,7 @@ module Challenge
           }
 
           scope :by_country, lambda { |country|
-            where('movies.country ilike ?', "%#{country}%") if country.present?
+            joins(:countries).merge(Challenge::Models::Country.by_name_ilike(country)) if country.present?
           }
 
           scope :by_published_at, lambda { |start_period, end_period|

@@ -32,7 +32,6 @@ module Movie
         context.movie.categories = Movie::Category.save_categories(new_data['listed_in'])
 
         context.movie.save
-        byebug
       end
     end
   end
