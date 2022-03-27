@@ -1,5 +1,17 @@
 require 'rails_helper'
 RSpec.describe Challenge::Models::Movie, type: :model do
+  describe 'Associations' do
+    it { should have_many(:movies_countries).class_name('Challenge::Models::MovieCountry').inverse_of(:movie) }
+    it { should have_many(:movies_categories).class_name('Challenge::Models::MovieCategory').inverse_of(:movie) }
+    it { should have_many(:directors).class_name('Challenge::Models::Director').inverse_of(:movie) }
+    it { should have_many(:actors).class_name('Challenge::Models::Actor').inverse_of(:movie) }
+
+    it { should have_many(:countries).through(:movies_countries) }
+    it { should have_many(:categories).through(:movies_categories) }
+    it { should have_many(:persons_directors).through(:directors).source(:person) }
+    it { should have_many(:persons_actors).through(:actors).source(:person) }
+  end
+
   describe 'Validations' do
     context 'Validate required presence of some attributes' do
       it { should validate_presence_of(:id) }
@@ -28,13 +40,20 @@ RSpec.describe Challenge::Models::Movie, type: :model do
 
   describe 'Scopes' do
     context 'Test filters and create examples' do
-        movie1 = FactoryBot.create(:movies, title: 'm1', year: '2020', country: 'br', genre: 0, published_at: '2020-01-01')
-        movie2 = FactoryBot.create(:movies, title: 'm2', year: '2019', country: 'us', genre: 0, published_at: '2021-09-01')
-        movie3 = FactoryBot.create(:movies, title: 'm3', year: '2028', country: 'uk', genre: 1, published_at: '2023-01-01')
-        movie4 = FactoryBot.create(:movies, title: 'm4', year: '2000', country: 'es', genre: 1, published_at: '2000-01-01')
-        movie5 = FactoryBot.create(:movies, title: 'm5', year: '2020', country: 'br', genre: 1, published_at: '2000-01-01')
+      before(:each) do
+        @movie1 = FactoryBot.create(:movies, title: 'm1', year: '2020', genre: 0, published_at: '2020-01-01')
+        movie2 = FactoryBot.create(:movies, title: 'm2', year: '2019', genre: 0, published_at: '2021-09-01')
+        movie3 = FactoryBot.create(:movies, title: 'm3', year: '2028', genre: 1, published_at: '2023-01-01')
+        movie4 = FactoryBot.create(:movies, title: 'm4', year: '2000', genre: 1, published_at: '2000-01-01')
+        movie5 = FactoryBot.create(:movies, title: 'm5', year: '2020', genre: 1, published_at: '2000-01-01')
+
+        FactoryBot.create(:movies_countries, movie_id: @movie1.id)
+        FactoryBot.create(:movies_countries, movie_id: @movie1.id)
+        FactoryBot.create(:movies_countries, movie_id: movie2.id)
+      end
+
         it 'Filter by_title' do
-            movies = Challenge::Models::Movie.by_title(movie1.title)
+            movies = Challenge::Models::Movie.by_title(@movie1.title)
             expect(movies.length).to eq(1)
         end
 
@@ -44,12 +63,12 @@ RSpec.describe Challenge::Models::Movie, type: :model do
         end
 
         it 'Filter by_year' do
-            movies = Challenge::Models::Movie.by_year(movie1.year)
+            movies = Challenge::Models::Movie.by_year(@movie1.year)
             expect(movies.length).to eq(2)
         end
 
         it 'Filter by_country' do
-            movies = Challenge::Models::Movie.by_country(movie4.country)
+            movies = Challenge::Models::Movie.by_country(@movie1.countries.first.name)
             expect(movies.length).to eq(1)
         end
 

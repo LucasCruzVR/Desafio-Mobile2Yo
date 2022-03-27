@@ -11,8 +11,8 @@ module Challenge
 
           has_many :countries, through: :movies_countries
           has_many :categories, through: :movies_categories
-          has_many :persons_directors, through: :directors, source: :person, class_name: 'Challenge::Models::Person', inverse_of: :movies
-          has_many :persons_actors, through: :actors, source: :person, class_name: 'Challenge::Models::Person', inverse_of: :movies
+          has_many :persons_directors, through: :directors, source: :person, class_name: 'Challenge::Models::Person'
+          has_many :persons_actors, through: :actors, source: :person, class_name: 'Challenge::Models::Person'
         end
       end
     end
