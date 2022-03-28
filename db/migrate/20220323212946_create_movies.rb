@@ -7,8 +7,6 @@ class CreateMovies < ActiveRecord::Migration[7.0]
       t.string :year, null: false, comment: "Released at this year"
       t.date :published_at, null: false, comment: "Become part of Netflix Catalog"
       t.text :description, null: false, comment: "Movie description"
-      t.string :director, comment: "Movie director"
-      t.string :cast, comment: "Movie cast"
       t.string :rating, comment: "Movie rating"
       t.string :duration, comment: "Movie Duration"
 

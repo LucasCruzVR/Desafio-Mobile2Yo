@@ -6,7 +6,7 @@ module Challenge
 
         included do
           scope :by_title, lambda { |title|
-            where('movies.title ilike ?', title) if title.present?
+            where('movies.title ILIKE ?', "%#{title}%") if title.present?
           }
 
           scope :by_genre, lambda { |genre|

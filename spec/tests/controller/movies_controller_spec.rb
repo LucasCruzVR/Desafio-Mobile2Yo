@@ -10,12 +10,10 @@ RSpec.describe 'Movies Requests', type: :request do
 
   describe 'GET /api/v1/movies INDEX' do
     context 'When there is no search filter' do
-      movies = []
       before(:each) do
         5.times do
           movie = FactoryBot.create(:movies, year: '2022', published_at: '2020-06-01')
           FactoryBot.create(:movies_countries, movie_id: movie.id)
-          movies << movie
         end
       end
       it 'Return all data' do
