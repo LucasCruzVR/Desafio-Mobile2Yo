@@ -36,6 +36,10 @@ A resposta obtida no body da requisição segue o padrão abaixo:
 - page: integer (mudar de página)
 - per_page: integer (quantidade de itens que são exibidos por página)
 
+### **Importante:** 
+
+Ao iniciar as migrates (db:create db:migrate), não esquecer de também executar **db:seed** para que alguns dados já venham salvos no banco antes da utilização.
+
 ## Modelagem
 ![alt text](https://i.imgur.com/Tko5sww.png)
 
