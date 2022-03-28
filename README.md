@@ -36,5 +36,26 @@ A resposta obtida no body da requisição segue o padrão abaixo:
 - page: integer (mudar de página)
 - per_page: integer (quantidade de itens que são exibidos por página)
 
-# Modelagem
+## Modelagem
 ![alt text](https://i.imgur.com/Tko5sww.png)
+
+## Utilizando o projeto com Docker
+
+Crie uma conexão com o banco de dados Postgres e utilize as seguintes configurações para configuração de um servidor:
+- hostname: localhost
+- port: 5436
+- username: postgres
+- password: postgres
+
+É possível utilizar outras configurações e bancos, mas teriam que ser configurados manualmente para o docker conseguir ser executado sem problemas.
+
+Na raíz do projeto, gere o build antes da execução com o comando abaixo. Lembrando que é necessário ter o docker e acesso ao docker-compose para a execução.
+```
+docker-compose build
+```
+
+Após gerar o build do projeto basta digitar o comando abaixo, permitindo que abra o terminal para digitar comandos linux e da linguagem.
+```
+docker-compose run --service-ports --rm desafio bash
+```
+
